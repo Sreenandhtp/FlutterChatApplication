@@ -1,11 +1,7 @@
-import 'package:delightful_toast/delight_toast.dart';
-import 'package:delightful_toast/toast/components/toast_card.dart';
-import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mychatapp/models/user_profile.dart';
 import 'package:mychatapp/pages/chat_page.dart';
-import 'package:mychatapp/pages/loginpage.dart';
 import 'package:mychatapp/services/auth_service.dart';
 import 'package:mychatapp/services/database_service.dart';
 import 'package:mychatapp/widgets/chat_tile.dart';
@@ -34,38 +30,9 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Messeges",
+          "Chats",
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              bool result = await _authService.logout();
-              if (result) {
-                DelightToastBar(
-                  autoDismiss: true,
-                  position: DelightSnackbarPosition.top,
-                  builder: (context) {
-                    return const ToastCard(
-                      leading: Icon(Icons.check),
-                      title: Text(
-                        "Successfuly logged out!....",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 14),
-                      ),
-                    );
-                  },
-                ).show(context);
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
-              }
-            },
-            icon: const Icon(Icons.logout),
-          )
-        ],
       ),
       body: _builtUI(),
     );
@@ -74,7 +41,7 @@ class _HomepageState extends State<Homepage> {
   Widget _builtUI() {
     return SafeArea(
       child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: _chatsList()),
     );
   }

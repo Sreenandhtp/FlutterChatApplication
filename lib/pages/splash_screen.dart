@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mychatapp/pages/homepage.dart';
+import 'package:mychatapp/pages/bottom_navigator.dart';
 import 'package:mychatapp/pages/loginpage.dart';
 import 'package:mychatapp/services/auth_service.dart';
 
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Homepage(),
+            builder: (context) => const BottomNavigator(),
           ));
     } else {
       Navigator.push(

@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mychatapp/const.dart';
 import 'package:mychatapp/models/user_profile.dart';
-import 'package:mychatapp/pages/homepage.dart';
+import 'package:mychatapp/pages/bottom_navigator.dart';
 import 'package:mychatapp/services/auth_service.dart';
 import 'package:mychatapp/services/database_service.dart';
 import 'package:mychatapp/services/media_service.dart';
@@ -231,7 +231,7 @@ class _LoginPageState extends State<RegisterPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Homepage(),
+                    builder: (context) => const BottomNavigator(),
                   ));
             } else {
               throw Exception("Unable to register user");

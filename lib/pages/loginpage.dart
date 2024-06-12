@@ -4,7 +4,7 @@ import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mychatapp/const.dart';
-import 'package:mychatapp/pages/homepage.dart';
+import 'package:mychatapp/pages/bottom_navigator.dart';
 import 'package:mychatapp/pages/registerpage.dart';
 import 'package:mychatapp/services/auth_service.dart';
 import '../widgets/custometextfield.dart';
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Homepage(),
+                    builder: (context) => const BottomNavigator(),
                   ));
             } else {
               DelightToastBar(

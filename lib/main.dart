@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mychatapp/pages/loginpage.dart';
 import 'package:mychatapp/pages/splash_screen.dart';
 import 'package:mychatapp/utils.dart';
 
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
           textTheme: GoogleFonts.montserratTextTheme()),
-      home:  SplashScreen(),
+      home: const SplashScreen(),
       // routes: {
       //   "loginPage": (context) {
       //     return const LoginPage();
