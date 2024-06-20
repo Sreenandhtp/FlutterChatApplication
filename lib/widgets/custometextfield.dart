@@ -35,7 +35,7 @@ class CustomeTextField extends StatelessWidget {
             labelText: labeltext,
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-                onSaved: onsave,
+        onSaved: onsave,
       ),
     );
   }

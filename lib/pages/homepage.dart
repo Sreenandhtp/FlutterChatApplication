@@ -33,6 +33,12 @@ class _HomepageState extends State<Homepage> {
           "Chats",
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          )
+        ],
       ),
       body: _builtUI(),
     );

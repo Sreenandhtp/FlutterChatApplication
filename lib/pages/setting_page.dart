@@ -34,12 +34,17 @@ class _SettingState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          profilePhoto(),
-          logOutBotton(),
-        ],
+      appBar: AppBar(
+        title: const Text("Settings"),
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            profilePhoto(),
+            logOutBotton(),
+          ],
+        ),
       ),
     );
   }
@@ -48,11 +53,14 @@ class _SettingState extends State<Settings> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CircleAvatar(
-          radius: 40,
-          // backgroundImage: NetworkImage(_authService.user!.photoURL!),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: CircleAvatar(
+            radius: MediaQuery.of(context).size.width * 0.11,
+            // backgroundImage: NetworkImage(_authService.user!.photoURL!),
+          ),
         ),
-        Text(loggedUser!.uid!)
+        // Text(loggedUser!.uid!)
       ],
     );
   }
@@ -83,9 +91,10 @@ class _SettingState extends State<Settings> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        color: const Color.fromARGB(255, 255, 255, 255),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.08,
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
