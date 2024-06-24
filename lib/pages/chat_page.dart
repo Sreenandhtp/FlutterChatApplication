@@ -87,6 +87,7 @@ class _ChatPageState extends State<ChatPage> {
             ),
             inputOptions: InputOptions(alwaysShowSend: true, trailing: [
               _mediaMessageButton(),
+              _mediaCameraButton(),
             ]),
             currentUser: currentUser!,
             onSend: _sendMessage,
@@ -173,6 +174,39 @@ class _ChatPageState extends State<ChatPage> {
         },
         icon: Icon(
           Icons.image,
+          color: Theme.of(context).colorScheme.primary,
+        ));
+  }
+
+  Widget _mediaCameraButton() {
+    return IconButton(
+        onPressed: () async {
+          File? file = await _mediaService.getCameraAccess();
+          if (file != null) {
+            String chatID =
+                generateChatID(uid1: currentUser!.id, uid2: otherUser!.id);
+
+            String? downLoadURL = await _storageService.upLoadImageToChat(
+              file: file,
+              chatID: chatID,
+            );
+            if (downLoadURL != null) {
+              ChatMessage chatMessage = ChatMessage(
+                  user: currentUser!,
+                  createdAt: DateTime.now(),
+                  medias: [
+                    ChatMedia(
+                      url: downLoadURL,
+                      fileName: "",
+                      type: MediaType.image,
+                    ),
+                  ]);
+              _sendMessage(chatMessage);
+            }
+          }
+        },
+        icon: Icon(
+          Icons.camera_alt,
           color: Theme.of(context).colorScheme.primary,
         ));
   }

@@ -14,4 +14,12 @@ class MediaService {
     }
     return null;
   }
+
+  Future<File?> getCameraAccess() async {
+    final XFile? _file = await _picker.pickImage(source: ImageSource.camera);
+    if (_file != null) {
+      return File(_file.path);
+    }
+    return null;
+  }
 }

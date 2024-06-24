@@ -5,7 +5,7 @@ import 'package:mychatapp/pages/loginpage.dart';
 import 'package:mychatapp/services/auth_service.dart';
 
 class SplashScreen extends StatefulWidget {
- const SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

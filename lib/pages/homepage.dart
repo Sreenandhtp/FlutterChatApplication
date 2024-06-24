@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mychatapp/models/user_profile.dart';
 import 'package:mychatapp/pages/chat_page.dart';
 import 'package:mychatapp/services/auth_service.dart';
@@ -14,6 +17,10 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  bool isConnectedToInternet = false;
+
+  StreamSubscription? _internetConnectionStreamSubscription;
+
   final GetIt _getIt = GetIt.instance;
 
   late AuthService _authService;
@@ -22,17 +29,51 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+    _internetConnectionStreamSubscription =
+        InternetConnection().onStatusChange.listen((event) {
+      print(event);
+      switch (event) {
+        case InternetStatus.connected:
+          setState(() {
+            isConnectedToInternet = true;
+          });
+          break;
+        case InternetStatus.disconnected:
+          setState(() {
+            isConnectedToInternet = false;
+          });
+
+          break;
+        default:
+          setState(() {
+            isConnectedToInternet = false;
+          });
+          break;
+      }
+    });
     _authService = _getIt.get<AuthService>();
     _databaseService = _getIt.get<DatabaseService>();
   }
 
+  @override
+  void dispose() {
+    _internetConnectionStreamSubscription?.cancel();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text(
-          "Chats",
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
+        title: isConnectedToInternet
+            ? const Text(
+                "Chats",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              )
+            : const Text(
+                "Checking internet connection.......",
+                style: TextStyle(fontSize: 12, color: Colors.blueAccent),
+              ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -40,7 +81,7 @@ class _HomepageState extends State<Homepage> {
           )
         ],
       ),
-      body: _builtUI(),
+      body: isConnectedToInternet ? _builtUI() : _offlineMessege(),
     );
   }
 
@@ -93,6 +134,23 @@ class _HomepageState extends State<Homepage> {
             child: CircularProgressIndicator(),
           );
         });
+  }
+
+  Widget _offlineMessege() {
+    return Container(
+      color: Colors.white,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/nointernet.gif'),
+          ],
+        ),
+      ),
+    );
   }
 }
 //FaIcon(FontAwesomeIcons.message),
