@@ -65,6 +65,8 @@ class _SettingState extends State<Settings> {
     );
   }
 
+  
+
   Widget logOutBotton() {
     return GestureDetector(
       onTap: () async {
@@ -91,7 +93,6 @@ class _SettingState extends State<Settings> {
         }
       },
       child: Container(
-        color: const Color.fromARGB(255, 255, 255, 255),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.08,

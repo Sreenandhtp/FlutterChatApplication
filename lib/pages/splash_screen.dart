@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   late AuthService _authService;
 
-  // bool isLoading = false;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkUserLogged() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     print(_authService.user);
     if (_authService.user != null) {
       Navigator.push(

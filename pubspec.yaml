@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  adaptive_theme: ^3.6.0
   cloud_firestore: ^4.16.1
   cupertino_icons: ^1.0.6
   dash_chat_2: ^0.0.20

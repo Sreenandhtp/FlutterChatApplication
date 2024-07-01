@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mychatapp/models/user_profile.dart';
 import 'package:mychatapp/pages/chat_page.dart';
@@ -64,6 +64,33 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      drawer: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 80),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Icon(Icons.auto_mode),
+                  const Text('Dark mode'),
+                  Switch(
+                      value: AdaptiveTheme.of(context).mode.isDark,
+                      onChanged: (value) {
+                        if (value) {
+                          AdaptiveTheme.of(context).setDark();
+                        } else {
+                          AdaptiveTheme.of(context).setLight();
+                        }
+                      })
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: isConnectedToInternet
             ? const Text(
